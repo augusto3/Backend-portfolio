@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
 import java.util.Set;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @RestController
@@ -46,6 +47,7 @@ public class AuthController {
     @Autowired
     JwtProvider jwtProvider;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/nuevo")
     public ResponseEntity<?> nuevo(@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindingResult){
         if(bindingResult.hasErrors())
